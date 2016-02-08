@@ -23,6 +23,8 @@
     const jscs = require('gulp-jscs');
     const mocha = require('gulp-mocha');
     const jshint = require('gulp-jshint');
+    const notify = require('gulp-notify');
+    const plumber = require('gulp-plumber');
 
     const options = {
         source: {
@@ -31,8 +33,11 @@
         tests: ['test/**/*']
     };
 
+    const handleError = notify.onError({message: '<%= error.message %>', title: 'Error'});
+
     gulp.task('jshint', function () {
         return gulp.src(options.source.js)
+            .pipe(plumber({errorHandler: handleError}))
             .pipe(jshint())
             .pipe(jshint.reporter())
             .pipe(jshint.reporter('fail'));
@@ -40,6 +45,7 @@
 
     gulp.task('jscs', function () {
         return gulp.src(options.source.js)
+            .pipe(plumber({errorHandler: handleError}))
             .pipe(jscs())
             .pipe(jscs.reporter())
             .pipe(jscs.reporter('fail'));
@@ -47,6 +53,7 @@
 
     gulp.task('test', function () {
         return gulp.src(options.tests)
+            .pipe(plumber({errorHandler: handleError}))
             .pipe(mocha({
                 reporter: 'min',
                 clearRequireCache: true,
