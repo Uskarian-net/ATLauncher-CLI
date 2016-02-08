@@ -1,0 +1,42 @@
+{
+    "name": "atlauncher-cli",
+    "version": "0.0.1",
+    "description": "This is a CLI application for ATLauncher written in NodeJS.",
+    "main": "app.js",
+    "engines": {
+        "node": ">=4.2.0"
+    },
+    "bin": {
+        "atlauncher": "./bin/atlauncher.js"
+    },
+    "scripts": {
+        "test": "gulp test"
+    },
+    "author": "RyanTheAllmighty <ryantheallmighty@atlauncher.com>",
+    "license": "GPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ATLauncher/ATLauncher-CLI.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ATLauncher/ATLauncher-CLI/issues"
+    },
+    "homepage": "https://github.com/ATLauncher/ATLauncher-CLI",
+    "keywords": [
+        "atlauncher",
+        "modpack",
+        "minecraft"
+    ],
+    "dependencies": {
+        "commander": "^2.9.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-jscs": "^3.0.2",
+        "gulp-jshint": "^2.0.0",
+        "gulp-mocha": "^2.2.0",
+        "jscs": "^2.9.0",
+        "jshint": "^2.9.1",
+        "mocha": "^2.4.5"
+    }
+}
