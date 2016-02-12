@@ -46,11 +46,11 @@
             };
 
             object.devVersions.forEach(function (version) {
-                this[objectSymbol].devVersions.push(new PackVersion(version));
+                this[objectSymbol].devVersions.push(new PackVersion(this, version));
             }.bind(this));
 
             object.versions.forEach(function (version) {
-                this[objectSymbol].versions.push(new PackVersion(version));
+                this[objectSymbol].versions.push(new PackVersion(this, version));
             }.bind(this));
         }
 

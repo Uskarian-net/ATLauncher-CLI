@@ -21,14 +21,23 @@
 (function () {
     'use strict';
 
-    const commander = require('commander');
+    const _ = require('lodash');
 
-    // Versions command
-    commander.command('versions', 'lists all the versions of the pack');
+    const PackManager = require('../inc/managers/packManager');
 
-    // Server command
-    commander.command('server', 'creates a server of the pack');
+    let versionName = process.argv[3];
 
-    // Parse the command line arguments and take action
-    commander.parse(process.argv);
+    PackManager.getPack(process.argv[2]).then(function (pack) {
+        if (!pack.createServer) {
+            return console.error(new Error(`Pack ${pack.name} doesn't allow creating servers`));
+        }
+
+        let packVersion = _.find(pack.versions, {version: versionName});
+
+        if (!packVersion) {
+            return console.error(new Error(`Version ${versionName} not found for pack ${pack.name}`));
+        }
+
+        packVersion.createServer().catch(console.error);
+    }).catch(console.error);
 })();
