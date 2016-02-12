@@ -21,6 +21,8 @@
 (function () {
     'use strict';
 
+    const _ = require('lodash');
+
     const Pack = require('../classes/pack');
     const CacheManager = require('./cacheManager');
 
@@ -41,7 +43,27 @@
 
                     resolve(packs);
                 }).catch(reject);
-            });
+            }.bind(this));
+        }
+
+        /**
+         * Gets a single pack by the given safe name.
+         *
+         * @param {String} name
+         * @returns {Promise}
+         */
+        getPack(name) {
+            return new Promise(function (resolve, reject) {
+                this.getAllPacks().then(function (packs) {
+                    let pack = _.find(packs, {safeName: name});
+
+                    if (!pack) {
+                        return reject(new Error(`No pack found with the given safe name of ${name}`));
+                    }
+
+                    resolve(pack);
+                }).catch(reject);
+            }.bind(this));
         }
     }
 
