@@ -29,10 +29,49 @@
          */
         constructor(object) {
             this[objectSymbol] = {
+                version: object.version,
                 minecraft: object.minecraft,
-                published: new Date(object.published * 1000),
-                version: object.version
+                hash: object.hash,
+                canUpdate: object.canUpdate || true,
+                isRecommended: object.isRecommended || false,
+                isDev: object.isDev || false
             };
+        }
+
+        /**
+         * If this version can be updated to.
+         *
+         * @returns {Boolean}
+         */
+        get canUpdate() {
+            return this[objectSymbol].canUpdate;
+        }
+
+        /**
+         * A unique hash to be used to determine if a development version has been updated or not.
+         *
+         * @returns {String}
+         */
+        get hash() {
+            return this[objectSymbol].hash;
+        }
+
+        /**
+         * If this version is a development version or not.
+         *
+         * @returns {Boolean}
+         */
+        get isDev() {
+            return this[objectSymbol].isDev;
+        }
+
+        /**
+         * If this version is recommended or not.
+         *
+         * @returns {Boolean}
+         */
+        get isRecommended() {
+            return this[objectSymbol].isRecommended;
         }
 
         /**
@@ -42,15 +81,6 @@
          */
         get minecraft() {
             return this[objectSymbol].minecraft;
-        }
-
-        /**
-         * Gets the date that this version was published.
-         *
-         * @returns {Date}
-         */
-        get published() {
-            return this[objectSymbol].published;
         }
 
         /**

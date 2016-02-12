@@ -20,6 +20,8 @@
     'use strict';
 
     module.exports = {
+        cacheManager: require('./cacheManager'),
+        minecraftVersionManager: require('./minecraftVersionManager'),
         packManager: require('./packManager')
     };
 })();

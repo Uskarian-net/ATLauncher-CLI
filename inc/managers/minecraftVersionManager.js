@@ -21,29 +21,24 @@
 (function () {
     'use strict';
 
-    const Pack = require('../classes/pack');
     const CacheManager = require('./cacheManager');
+    const MinecraftVersion = require('../classes/minecraftVersion');
 
-    class PackManager {
-        /**
-         * Gets all the packs as Pack objects that are in the launcher.
-         *
-         * @returns {Promise}
-         */
-        getAllPacks() {
+    class MinecraftVersionManager {
+        getAllMinecraftVersions() {
             return new Promise(function (resolve, reject) {
-                CacheManager.getObject('packs.json').then(function (object) {
-                    let packs = [];
+                CacheManager.getObject('minecraftVersions.json').then(function (object) {
+                    let minecraftVersions = [];
 
-                    object.forEach(function (pack) {
-                        packs.push(new Pack(pack));
+                    object.forEach(function (minecraftVersion) {
+                        minecraftVersions.push(new MinecraftVersion(minecraftVersion));
                     });
 
-                    resolve(packs);
+                    resolve(minecraftVersions);
                 }).catch(reject);
             });
         }
     }
 
-    module.exports = new PackManager();
+    module.exports = new MinecraftVersionManager();
 })();

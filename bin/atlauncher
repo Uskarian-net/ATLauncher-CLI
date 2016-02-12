@@ -21,11 +21,18 @@
 (function () {
     'use strict';
 
+    const fs = require('fs');
+    const _ = require('lodash');
+    const mkdirp = require('mkdirp');
     const commander = require('commander');
 
     const packageJson = require('../package.json');
 
     function setWorkingDirectory(value) {
+        if (!fs.existsSync(value)) {
+            mkdirp.sync(value);
+        }
+
         process.chdir(value);
     }
 
@@ -38,6 +45,11 @@
     // Packs command
     commander.command('packs', 'provides methods to deal with the packs on the launcher');
 
-    // Parse the command line arguments and take action
+    // Parse the command line arguments/options and do the stuff
     commander.parse(process.argv);
+
+    // If no command is passed in to be run then we output the help
+    if (!_.some(process.argv.slice(2), (arg) => _.includes(['packs'], arg))) {
+        commander.outputHelp();
+    }
 })();

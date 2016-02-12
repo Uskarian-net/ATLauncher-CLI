@@ -31,19 +31,36 @@
          */
         constructor(object) {
             this[objectSymbol] = {
-                description: object.description,
                 id: object.id,
+                position: object.position,
                 name: object.name,
-                safeName: object.safeName,
-                supportURL: object.supportURL,
                 type: object.type,
+                devVersions: [],
                 versions: [],
+                createServer: object.createServer || true,
+                leaderboards: object.leaderboards || true,
+                logging: object.logging || true,
+                description: object.description,
+                supportURL: object.supportURL,
                 websiteURL: object.websiteURL
             };
+
+            object.devVersions.forEach(function (version) {
+                this[objectSymbol].devVersions.push(new PackVersion(version));
+            }.bind(this));
 
             object.versions.forEach(function (version) {
                 this[objectSymbol].versions.push(new PackVersion(version));
             }.bind(this));
+        }
+
+        /**
+         * If creating servers for this pack is enabled.
+         *
+         * @returns {Boolean}
+         */
+        get createServer() {
+            return this[objectSymbol].createServer;
         }
 
         /**
@@ -56,12 +73,39 @@
         }
 
         /**
+         * Gets all the development versions (if any) for this pack.
+         *
+         * @returns {PackVersion[]}
+         */
+        get devVersions() {
+            return this[objectSymbol].versions;
+        }
+
+        /**
          * Gets the internal ID of this pack.
          *
          * @returns {Number}
          */
         get id() {
             return this[objectSymbol].id;
+        }
+
+        /**
+         * If leaderboards for this pack are enabled.
+         *
+         * @returns {Boolean}
+         */
+        get leaderboards() {
+            return this[objectSymbol].leaderboards;
+        }
+
+        /**
+         * If logging for this pack are enabled.
+         *
+         * @returns {Boolean}
+         */
+        get logging() {
+            return this[objectSymbol].logging;
         }
 
         /**
@@ -74,12 +118,21 @@
         }
 
         /**
+         * Gets the position of this pack.
+         *
+         * @returns {Number}
+         */
+        get position() {
+            return this[objectSymbol].position;
+        }
+
+        /**
          * Gets the safe name of this pack (for use in commands and url's).
          *
          * @returns {String}
          */
         get safeName() {
-            return this[objectSymbol].safeName;
+            return this[objectSymbol].name.replace(/[^0-9A-Za-z]/g, '');
         }
 
         /**
@@ -102,6 +155,7 @@
 
         /**
          * Gets all the published versions (if any) for this pack.
+         *
          * @returns {PackVersion[]}
          */
         get versions() {

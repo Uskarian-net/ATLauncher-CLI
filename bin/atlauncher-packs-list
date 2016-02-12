@@ -23,9 +23,9 @@
 
     const Table = require('cli-table2');
 
-    const managers = require('../inc/managers');
+    const PackManager = require('../inc/managers/packManager');
 
-    managers.packManager.getAllPacks().then(function (packs) {
+    PackManager.getAllPacks().then(function (packs) {
         packs.forEach((pack) => console.log(pack.name));
         let table = new Table({
             head: ['ID', 'Name', 'Safe Name']

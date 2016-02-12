@@ -28,11 +28,14 @@
     "minecraft"
   ],
   "dependencies": {
-    "atlauncher-api": "^1.2.0",
+    "async": "^1.5.2",
     "cli-table2": "^0.2.0",
     "commander": "^2.9.0",
     "lodash": "^4.3.0",
-    "mcversions": "^1.0.1"
+    "mkdirp": "^0.5.1",
+    "request": "^2.69.0",
+    "rimraf": "^2.5.1",
+    "touch": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
