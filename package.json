@@ -28,7 +28,11 @@
     "minecraft"
   ],
   "dependencies": {
-    "commander": "^2.9.0"
+    "atlauncher-api": "^1.2.0",
+    "cli-table2": "^0.2.0",
+    "commander": "^2.9.0",
+    "lodash": "^4.3.0",
+    "mcversions": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

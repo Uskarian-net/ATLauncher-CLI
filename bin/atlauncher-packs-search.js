@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+/*
+ * ATLauncher CLI - https://github.com/ATLauncher/ATLauncher-CLI
+ * Copyright (C) 2016 ATLauncher
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+(function () {
+    'use strict';
+
+    const _ = require('lodash');
+    const Table = require('cli-table2');
+
+    const managers = require('../inc/managers');
+
+    let searchTerm = process.argv[2];
+
+    managers.packManager.getAllPacks().then(function (packs) {
+        packs.forEach((pack) => console.log(pack.name));
+        let table = new Table({
+            head: ['ID', 'Name', 'Safe Name']
+        });
+
+        packs = _.filter(packs, (pack) => pack.name.indexOf(searchTerm) !== -1);
+
+        if (packs.length === 0) {
+            return console.error(`No packs found matching ${searchTerm}!`);
+        }
+
+        packs.forEach(function (pack) {
+            table.push([pack.id, pack.name, pack.safeName]);
+        });
+
+        console.log(table.toString());
+    });
+})();

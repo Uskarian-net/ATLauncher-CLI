@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * ATLauncher CLI - https://github.com/ATLauncher/ATLauncher-CLI
  * Copyright (C) 2016 ATLauncher
@@ -21,20 +19,7 @@
 (function () {
     'use strict';
 
-    const commander = require('commander');
-
-    const packageJson = require('../package.json');
-
-    function setWorkingDirectory(value) {
-        process.chdir(value);
-    }
-
-    // Parse the version from the package.json file
-    commander.version(packageJson.version);
-
-    // Allow setting the working directory
-    commander.option('-d, --directory [value]', 'the directory to act as the working directory', setWorkingDirectory, process.cwd());
-
-    // Parse the command line arguments and take action
-    commander.parse(process.argv);
+    module.exports = {
+        packManager: require('./packManager')
+    };
 })();
