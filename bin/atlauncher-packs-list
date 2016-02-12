@@ -27,11 +27,11 @@
 
     PackManager.getAllPacks().then(function (packs) {
         let table = new Table({
-            head: ['ID', 'Name', 'Safe Name']
+            head: ['ID', 'Position', 'Name', 'Safe Name']
         });
 
         packs.forEach(function (pack) {
-            table.push([pack.id, pack.name, pack.safeName]);
+            table.push([pack.id, pack.position, pack.name, pack.safeName]);
         });
 
         console.log(table.toString());

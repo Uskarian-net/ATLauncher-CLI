@@ -29,9 +29,8 @@
     let searchTerm = process.argv[2];
 
     managers.packManager.getAllPacks().then(function (packs) {
-        packs.forEach((pack) => console.log(pack.name));
         let table = new Table({
-            head: ['ID', 'Name', 'Safe Name']
+            head: ['ID', 'Position', 'Name', 'Safe Name']
         });
 
         packs = _.filter(packs, (pack) => pack.name.indexOf(searchTerm) !== -1);
@@ -41,7 +40,7 @@
         }
 
         packs.forEach(function (pack) {
-            table.push([pack.id, pack.name, pack.safeName]);
+            table.push([pack.id, pack.position, pack.name, pack.safeName]);
         });
 
         console.log(table.toString());
