@@ -26,7 +26,6 @@
     const PackManager = require('../inc/managers/packManager');
 
     PackManager.getAllPacks().then(function (packs) {
-        packs.forEach((pack) => console.log(pack.name));
         let table = new Table({
             head: ['ID', 'Name', 'Safe Name']
         });
