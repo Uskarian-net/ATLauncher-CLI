@@ -7,7 +7,7 @@
     "node": ">=4.2.0"
   },
   "bin": {
-    "atlauncher": "./bin/atlauncher.js"
+    "atlauncher": "./bin/atlauncher"
   },
   "scripts": {
     "test": "gulp test"
