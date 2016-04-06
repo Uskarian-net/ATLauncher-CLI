@@ -6,8 +6,8 @@
   "engines": {
     "node": ">=4.2.0"
   },
-  "bin": {
-    "atlauncher": "./bin/atlauncher.js"
+  "directories": {
+    "bin": "./bin"
   },
   "scripts": {
     "test": "gulp test"
